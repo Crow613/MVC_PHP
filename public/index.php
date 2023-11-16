@@ -1,18 +1,11 @@
 <?php
 
-use App\core\Router;
-require '../app/Lib/Dev.php';
-require_once '../vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-spl_autoload_register(function($class){
+use App\Core\Router;
+$confDb = require dirname(__DIR__ ) . '/Config/envDB.php';
 
-    $path = str_replace('\\', '/', $class.'.php');
+session_start();
 
-    if(file_exists($path)){
-
-        require $path;
-    }
-
-});
-
-$us = new Router;
+$router = new Router();
+$router->run();
