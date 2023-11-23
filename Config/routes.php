@@ -1,13 +1,27 @@
 <?php
 
 return [
-    
+
+        'variation/update' => [
+
+            'Controller' => 'variation',
+            'Action' => 'update'
+        ],
+
+        'variation/delete' => [
+            'Controller' => 'variation',
+            'Action' => 'delete'
+        ],
+
+        'variation/data' => [
+
+            'Controller' => 'variation',
+            'Action' => 'delete'
+        ],
+
         '' => [
-
-            'controller' => 'main',
+            'Controller' => 'mein',
             'Action' => 'index'
+        ],
 
-        ]
-
- 
     ];
