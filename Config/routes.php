@@ -19,9 +19,4 @@ return [
             'Action' => 'delete'
         ],
 
-        '' => [
-            'Controller' => 'mein',
-            'Action' => 'index'
-        ],
-
     ];
