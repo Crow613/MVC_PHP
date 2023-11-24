@@ -2,13 +2,12 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-use App\Core\Request;
-use App\Core\Router;
+use Core\Request;
+use Core\Router;
 
-$confDb = require dirname(__DIR__ ) . '/Config/envDB.php';
-$confRout = require '../Config/routes.php';
+$confDb = require dirname(__DIR__ ) . '/config/envDB.php';
+$confRoute = require dirname(__DIR__).'/config/routes.php';
 
-$request = new Request( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $confRout);
-$router = new Router($request);
-$router->manipullUri();
-$routes = UpdateController::class('update'); 
+$request = new Request($_SERVER);
+$router = new Router($request,$confRoute);
+$router->prepareUri();
