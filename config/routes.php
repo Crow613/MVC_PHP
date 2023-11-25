@@ -1,25 +1,24 @@
 <?php
 
-return [
-         'GET' => [
+      function myGetMethod()
+      {
+           
+         return [
              
-             
-             'test' => [
-                 
-                 'Controller' => 'test',
-                 'Action' => 'update'
-             ],
+            'test' =>['test','index' ], 
+            'test/delete' =>['test','delete'],
+            'test/update' =>['test','update'],
+            'test/upgrade' =>['test','upgrade'],
+            'test/data' =>['test','data']
+          
+            ];
          
-            
+      }
+         
+      function myPostMethod() {
+          
+            return [
              
-             'test/delete' => [
-                 
-                 'Controller' => 'test',
-                 'Action' => 'delete'
-                 
-             ]
-             
-           ],
-
-        ];
-    
+                   ];
+  
+      }

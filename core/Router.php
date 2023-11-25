@@ -2,77 +2,82 @@
 
 namespace Core;
 
+/**
+ * @author CROW613 
+ * @author MORYARTY
+ *
+ */
+
 class Router 
 {
     
   public REQUEST $request;
-  public array $routeConfig;
  
-
-  public function __construct(REQUEST $request,array $routeConfig)
+  public function __construct(REQUEST $request)
   {
     
     $this->request = $request;
-    $this->routeConfig = $routeConfig;
-    
    
   }
 
   public function prepareUri()
   {
-      
-    $uri = $this->request->uri();
+  
     $method = $this->request->getMethod();
+    $uri = $this->request->uri();
+    $route = myGetMethod();
+    $get = 'GET';
+   // $post = 'POST';
+    $flag = false;
+     
+    similar_text($method,$get,$methodSwitch);
     
-    $cleanUri = ltrim($uri, '/');
-      
-    foreach ($this->routeConfig[$method] as $key => $value) {
+    $cleanUri = trim($uri, '/');
+  
+     if($methodSwitch === 100.0){   
+         
+           foreach ($route as $location => $params){
+                         
+                    $controller = $params[0];
+                    $action = $params[1];
+                    $location = '#^'.$location.'$#';
         
-        
-      $key ='#^'.$key.'$#';
-    
-      if(preg_match($key, $cleanUri)){
+              if(preg_match($location,$cleanUri, $switchError)){
           
-          
-        $controller = $value['Controller'];
-        $action = $value['Action']; 
-        $fillePath = ucfirst(strtolower($controller)) .'Controller';
-       
-                  
-        if (file_exists(dirname(__DIR__).'/app/Controllers/'.$fillePath.'.php')) {
-                      
-           $class = 'App\Controllers\\' . $fillePath;
-             
-            $controller = new $class;
-            
-          if (method_exists($controller,$action)) {
-            
-            $controller->$action();
-            
-            exit;
+                 $path = ucfirst(strtolower($controller)) .'Controller';       
            
-          }else {
-              
-              die('404');
-          }
-          
-        }else {
+                  if (file_exists(dirname(__DIR__).'/app/Controllers/'.$path.'.php')) {
+               
+                      $class = 'App\Controllers\\' . $path;
+                      $contClass = new $class;
+               
+                     if (method_exists($contClass,$action)) {
+                 
+                         $contClass->$action();
+                       
+                         exit;   
+                   
+                      }else {
+                               
+                             die('Error: No Method in Controller');
+                   
+                      }
+                
+                   }else {
+               
+               
+                          die('Error: No Controller');
+               
+                   }
+                   
+            } 
             
-            die('405');
         }
         
-      }else {
-          
-          // preg match
-          
-          die('405');
-          
-      }
-      
+     die('Error: NO Controller and Method');
+        
+   }
    
-     
-    }
-  
-  }  
-  
+ }
+   
 }
