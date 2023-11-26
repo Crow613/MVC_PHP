@@ -11,3 +11,4 @@ return [
     'charset' => 'utf8mb4'
     
 ];
+echo 'hi';
