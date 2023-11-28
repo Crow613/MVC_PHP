@@ -17,6 +17,8 @@ function reguliar($param)
 function str($string)
 {
 
+  
+
    return  ucfirst(strtolower($string));
 
 }

@@ -2,10 +2,15 @@
 
 namespace App\Controllers;
 
-
-
 class TestController
 {
+
+    public function index()
+    {
+
+      echo 'hi index';
+      
+    }
 
     public function delete()
     {

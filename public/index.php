@@ -10,4 +10,3 @@ use Config\controller\Routes;
 $getConfig = new Routes;
 $request = new Request();
 $router = new Router($request, $getConfig->getConfig());
-$router->prepare();

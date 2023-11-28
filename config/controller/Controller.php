@@ -2,31 +2,70 @@
 
 namespace Config\controller;
 
-
-class Controller extends ControllerConfig
+class Controller
 {
 
-  public function __construct(array $get)
-  {
+    public $controllerClass;
+    protected string $controller;
+    protected string $action;
 
-    return $this->getsMatch($get);
-
-  }
-
-  public function getsMatch($get)
-  {
-
-    foreach ($get as $key => $value){
-
-        if($key === $_SERVER['REQUEST_METHOD']){
-
-               
-           return $this->executController($value);
-
-        }
+    public function __construct(array $routes)
+    {
+      
+        $this->executController($routes);
 
     }
 
+  protected function executController(array $routes)
+  {
+
+     $uri = clearSlache($_SERVER['REQUEST_URI']);
+
+         foreach ($routes as $route => $params){
+
+               if(preg_match( reguliar($route), $uri)){
+
+                 $this->controller = $params[0];
+                 $this->action = $params[1];
+
+                $path = str($this->controller) . 'Controller';
+                return $this->prepareController($path);
+              }
+
+     }
+
   }
+
+  protected function prepareController($path)
+  {
+
+    $method = $this->action;
+
+
+    if (file_exists('..//app/Controllers/'.$path.'.php')) {
+
+        $class = '\App\Controllers\\' . $path;
+
+      $controllerClass = new $class;
+
+        if (method_exists($controllerClass,$method)) {
+
+                return $controllerClass->$method();
+
+        }else {
+
+            die('Error: No Method in Controller');
+
+        }
+
+   }else {
+
+      die('Error: No Controller');
+
+    }
+
+      die('Error: No Controller and Method');
+
+   }
 
 }
