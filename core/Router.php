@@ -2,33 +2,33 @@
 
 namespace Core;
 
+use Config\controller\Controller;
+
+
 /**
- * @author CROW613 
+ * @author CROW613
  * @author MORYARTY
  *
  */
 
-class Router 
+class Router
 {
-    
+
   public Request $request;
- 
-  public function __construct(Request $request)
+
+  public function __construct(Request $request,$getConfig)
   {
-    
+
     $this->request = $request;
-   
+    $this->prepare($getConfig);
+
   }
 
-  public function prepareUri()
+  public function prepare($routes)
   {
-     
-    $methods = $this->request->getMethod();
-    $uri = clearConfig($this->request->uri());
-    $routes = myGetMethod();
-   
-    return controllers($routes['METHODS'],$methods,$uri);
-      
+        
+    $controller = new Controller($routes);
+
  }
-   
+
 }

@@ -7,22 +7,23 @@ class Request
 
    public array $server;
    
-  public function __construct(array $server)
+  public function __construct()
   {
    
-    $this->server = $server;
+      $this->server = $_SERVER;
       
-  }
-  
-  public function getMethod() {
-      
-      return $this->server['REQUEST_METHOD'];
-   
   }
   
   public function uri() {
       
       return $this->server['REQUEST_URI'];
+      
+  }
+  
+  public function getMethod() 
+  {
+      
+      return $this->server['REQUEST_METHOD'];
       
   }
   
