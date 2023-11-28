@@ -10,8 +10,6 @@
 
           return [
 
-            //'METHODS' => [
-
                             'GET' => [
 
                                       'test' =>['test','index' ],
@@ -31,8 +29,6 @@
                                        'home/data' =>['test','data']
 
                                        ]
-
-                          //]
 
                   ];
 
