@@ -10,33 +10,25 @@
 
           return [
 
-                            'GET' => [
+                    'GET' => [
 
-                                    'user' =>['user','login' ],
-                                    'userregistration'=>['user','registration'],
-                                    'user/admin' =>['user','upgrade']
+                            'user/login' =>['user','login' ],
+                            'user/registration'=>['user','registration']
 
+                          ],
 
-                                      ],
+                    'POST' => [
 
-                            'POST' => [
+                                'user/login' =>['user','login' ],
+                                'user/registration'=>['user','registration'],
+                                'user/admin' =>['user','admin'],
+                                'product/calculator'=>['product','calculator']
 
-                                       'home' =>['test','index' ],
-                                       'home/delete' =>['test','delete'],
-                                       'home/update' =>['test','update'],
-                                       'home/upgrade' =>['test','upgrade'],
-                                       'home/data' =>['test','data']
+                              ],
 
-                                      ],
+                    'Delete' => [
 
-                          'Delete' => [
-
-                                        'home' =>['test','index' ],
-                                        'home' =>['test','index' ],
-                                        'home' =>['test','index' ],
-                                        'home' =>['test','index' ],
-
-                                      ]
+                                ]
 
                   ];
 

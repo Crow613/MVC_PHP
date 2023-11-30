@@ -1,25 +1,45 @@
 <?php
 
+namespace Core;
+
 class Response
 {
 
+  public function login($path)
+  {
 
-  public function index()
+    include $path;
+    die;
+
+  }
+
+  public function registration($path)
+  {
+
+    include $path;
+    die;
+
+  }
+
+  public function admin($path)
+  {
+
+    include $path;
+    die;
+
+  }
+
+  public function userPaghe()
   {
     // code...
   }
 
-  public function delete()
+  public function adminPaghe()
   {
     // code...
   }
 
-  public function update()
-  {
-    // code...
-  }
-
-  public function ()
+  public function product()
   {
     // code...
   }

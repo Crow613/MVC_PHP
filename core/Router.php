@@ -2,13 +2,8 @@
 
 namespace Core;
 
-use Pathern\controller\Controller;
+use Pathern\controller\ControllerConf;
 use Conf\routes\Routes;
-
- /**
- * @author CROW613
- * @author MORYARTY
- */
 
 class Router
 {
@@ -29,18 +24,40 @@ class Router
     $routesConf = new Routes;
     $routes = $routesConf->getConfig();
 
-   //dd($routes);
+        foreach ($routes as $key => $value) {
 
-    foreach ($routes as $key => $value) {
+          if($key === $this->request->getMethod()){
 
-      if($key === $this->request->getMethod()){
+            $controller = new ControllerConf();
 
-        return new Controller($value);
+                switch ($key) {
+                  case 'GET':
 
-      }
+                  return $controller->getMethods($value);
 
-    }
+                    break;
 
- }
+                  case 'POST':
+
+                  return  $controller->postMethods($value);
+
+                    break;
+                    
+                  case 'DELETE':
+
+                    return  $controller->deleteMethods($value);
+
+                    break;
+
+                  default:
+                    return error;
+                    break;
+                }
+
+        }
+
+     }
+
+  }
 
 }
