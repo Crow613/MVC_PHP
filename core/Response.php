@@ -5,43 +5,12 @@ namespace Core;
 class Response
 {
 
-  public function login($path)
+  public function __construct($path)
   {
 
-    include $path;
-    die;
+    require ($path);
+  // header($path);
 
-  }
-
-  public function registration($path)
-  {
-
-    include $path;
-    die;
-
-  }
-
-  public function admin($path)
-  {
-
-    include $path;
-    die;
-
-  }
-
-  public function userPaghe()
-  {
-    // code...
-  }
-
-  public function adminPaghe()
-  {
-    // code...
-  }
-
-  public function product()
-  {
-    // code...
   }
 
 }

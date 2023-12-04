@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use Pathern\controller\ControllerConf;
+use Mvc\controller\ControllerConf;
 use Conf\routes\Routes;
 
 class Router
@@ -42,7 +42,7 @@ class Router
                   return  $controller->postMethods($value);
 
                     break;
-                    
+
                   case 'DELETE':
 
                     return  $controller->deleteMethods($value);

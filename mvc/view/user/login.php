@@ -10,9 +10,9 @@
          <h1>LOGIN PAGE</h1>
       <form action="login" method="post">
 
-        <input type="login" name="login" value="">
+        <input type="email" name="email" value="">
         <input type="password" name="password" value="">
-        <button type="submit" name="button">signin</button>
+        <button type="submit">signin</button>
 
       </form>
 

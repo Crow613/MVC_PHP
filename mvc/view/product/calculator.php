@@ -1,8 +1,15 @@
+<?php
 
+ ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
 
-<div>
-
-    <form action="/" method="post">
+    <form action="calculator" method="post">
 
          <input type="number" name="num1" id="">
 
@@ -22,3 +29,7 @@
     </form>
 
 </div>
+
+</body>
+</html>
+<div>

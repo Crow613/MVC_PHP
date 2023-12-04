@@ -1,6 +1,6 @@
 <?php
 
-namespace Pathern\controller;
+namespace Mvc\controller;
 
 use App\Controllers\Controllers;
 use Core\Response;
@@ -8,18 +8,19 @@ use Core\Response;
 class Controller
 {
 
-  public function  getMethod($file,$method)
+  public function  getMethod($path)
   {
+    //dd($path);
 
-    $response = new Response();
-    $path = "../view/{$file}.php";
-    return $response->$method($path);
+    return new Response($path);
 
   }
 
-  public function postMethod()
+  public function postMethod($path)
   {
-    echo 'post controller';
+
+      return new Response($path);
+
   }
 
 }

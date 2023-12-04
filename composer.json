@@ -4,7 +4,7 @@
       "App\\": "./app",
       "Core\\": "./core",
       "Conf\\": "./conf",
-      "Pathern\\": "./mvc_pathern"
+      "Mvc\\": "./mvc"
     }
   },
 

@@ -1,12 +1,13 @@
 <?php
 
-namespace Pathern\controller;
+namespace Mvc\controller;
 
-use Pathern\controller\Controller;
-use Pathern\model\Model;
+use Mvc\controller\Controller;
+use Mvc\model\Model;
 
 class ControllerConf
 {
+  public $path;
 
   public function getMethods($routes)
   {
@@ -21,12 +22,14 @@ class ControllerConf
           $method = $params[1];
           $pathClass = $controller.'Controller';
           $file = $params[0].'/'.$params[1];
+          $this->path = dirname(__DIR__)."/view/{$file}.php";
 
-          if(file_exists('../view/'.$file.'.php'))
+          if(file_exists($this->path))
           {
 
+
             $controller = new Controller();
-            return $controller->getMethod($file,$method);
+            return $controller->getMethod($this->path);
 
           }
 
