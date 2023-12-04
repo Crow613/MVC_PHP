@@ -2,13 +2,32 @@
 
 namespace Mvc\model;
 
-use Conf\db\Connection;
+use Mvc\model\db\Connection;
 use Mvc\controller\Controller;
+use App\product\ModelCalculator;
 use Core\Response;
 use PDO;
 
 class Model
 {
+
+   public function calculator()
+   {
+
+     $num1= $_POST['num1'];
+     $num2= $_POST['num2'];
+     $options = $_POST['options'];
+     $send = $_POST['send'];
+     $result=$_POST['rez'];
+
+
+    $calculator = new ModelCalculator();
+    $controller= new Controller();
+    $calculator->match($num1,$num2,$options,$send,$result);
+
+        return $controller->postMethod('../mvc/view/product/calculator.php');
+
+   }
 
     public function admin()
     {
@@ -37,9 +56,11 @@ class Model
            $controller = new Controller;
            $controller->postMethod('../mvc/view/product/calculator.php');
 
+           //nenc ara routingic ga path@
+
         }else {
 
-          die("error: 25464");
+          die("error: complete");
 
         }
 
@@ -63,16 +84,19 @@ class Model
           $test = $connect->pdo->query("SELECT  `email` FROM `users`");
 
           $exses = $test->fetch(PDO::FETCH_ASSOC);
+          $mail=$exses['email'];
+          $flag=$email===$mail;
 
-         if(!$email === $exses['email']){
+         if($flag === false){
 
            $pass = md5($password) === 'dafsdfasdgeqwgredf';
            $query = "INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES (NULL, '$name', '$email', '$pass')";
            $stmt = $connect->pdo->prepare($query);
-              $stmt->execute();
+           $stmt->execute();
 
-         $controller = new Controller;
-         return  $controller->postMethod('../mvc/view/product/calculator.php');
+            $controller = new Controller;
+
+                 return  $controller->postMethod('../mvc/view/product/calculator.php');
 
              }else{
 

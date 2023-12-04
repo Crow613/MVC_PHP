@@ -8,14 +8,15 @@
 
     <div class="">
          <h1>LOGIN PAGE</h1>
-      <form action="login" method="post">
+
+      <form action="/user/login" method="post">
 
         <input type="email" name="email" value="">
         <input type="password" name="password" value="">
         <button type="submit">signin</button>
 
       </form>
-
+            <a href="/user/registration">registration</a>
     </div>
   </body>
 </html>

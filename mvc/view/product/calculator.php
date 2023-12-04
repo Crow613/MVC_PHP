@@ -9,7 +9,7 @@
   </head>
   <body>
 
-    <form action="calculator" method="post">
+    <form action="/product/calculator" method="post" >
 
          <input type="number" name="num1" id="">
 
@@ -24,7 +24,8 @@
 
          <button type="submit" name="send">=</button>
 
-         <input name"resultNum" placeholder="<?=$calc->match(); ?>">
+              <input name="rez">
+
 
     </form>
 

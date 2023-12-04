@@ -8,8 +8,7 @@ class Response
   public function __construct($path)
   {
 
-    require ($path);
-  // header($path);
+    include $path;
 
   }
 

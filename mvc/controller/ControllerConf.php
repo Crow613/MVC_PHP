@@ -7,62 +7,67 @@ use Mvc\model\Model;
 
 class ControllerConf
 {
-  public $path;
 
   public function getMethods($routes)
   {
 
-    $uri = clearSlache($_SERVER['REQUEST_URI']);
+     $route = explode( '/', trim($routes, '/'));
+     $flag = $route[0] === 'product';
+     $routeR ='#^'.$route[1].'$#';
 
-      foreach ($routes as $route => $params){
+      if($flag === false){
 
-        if(preg_match( reguliar($route), $uri)){
-
-          $controller = str($params[0]);
-          $method = $params[1];
-          $pathClass = $controller.'Controller';
-          $file = $params[0].'/'.$params[1];
-          $this->path = dirname(__DIR__)."/view/{$file}.php";
-
-          if(file_exists($this->path))
-          {
+             $path = dirname(__DIR__).'/view/'.$route[0].'/'.$route[1].'.php';
 
 
-            $controller = new Controller();
-            return $controller->getMethod($this->path);
+        if(file_exists($path)){
+
+             if($routeR){
+
+               $controller = new Controller();
+
+               return $controller->getMethod($path);
+
+            }
+
+        }else{
+
+          die('erorr:404');
 
           }
+     }else{
 
-        }
-
-    }
-
+       die('sa pti tani login');
+     }
   }
 
   public function postMethods($routes)
   {
-   foreach ($routes as $route => $value)
-    {
+         $route = explode( '/', trim($routes, '/'));
 
-     if($route === clearSlache($_SERVER['REQUEST_URI']))
-     {
-         $method = $value[1];
-         $model = new Model();
-         if(method_exists($model,$value[1])){
+         $routeR = '#^'.$route[1].'$#';
+
+        if($routeR){
+
+        $model = new Model();
+          $method = $route[1];
+         if(method_exists($model, $method)){
 
           return $model->$method();
 
-         }
+        }
+
+     }else{
+
+        die('error');
 
      }
-   }
-
-   die('error');
 
   }
 
   public function deleteMethods()
   {
+
 
   }
 

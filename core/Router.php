@@ -3,7 +3,6 @@
 namespace Core;
 
 use Mvc\controller\ControllerConf;
-use Conf\routes\Routes;
 
 class Router
 {
@@ -21,42 +20,45 @@ class Router
   public function prepare()
   {
 
-    $routesConf = new Routes;
-    $routes = $routesConf->getConfig();
 
-        foreach ($routes as $key => $value) {
 
-          if($key === $this->request->getMethod()){
 
-            $controller = new ControllerConf();
+    $route = $_SERVER['REQUEST_URI'];
+    $method = $_SERVER['REQUEST_METHOD'];
 
-                switch ($key) {
-                  case 'GET':
+    $getMethod=[
+      "GET"=>['/product/calculator'],
+      $method=>[$route]
+               ];
 
-                  return $controller->getMethods($value);
+ $routes = $getMethod[$method][0];
 
-                    break;
+                  $controllerConf = new ControllerConf();
+                             switch ($method) {
 
-                  case 'POST':
+                               case 'GET':
 
-                  return  $controller->postMethods($value);
+                               return $controllerConf->getMethods($routes);
 
-                    break;
+                                 break;
 
-                  case 'DELETE':
+                               case 'POST':
 
-                    return  $controller->deleteMethods($value);
+                               return  $controllerConf->postMethods($routes);
 
-                    break;
+                                 break;
 
-                  default:
-                    return error;
-                    break;
-                }
+                               case 'DELETE':
 
-        }
+                                 return  $controllerConf->deleteMethods($routes);
 
-     }
+                                 break;
+
+                               default:
+                                 return error;
+                                 break;
+                             }
+
 
   }
 
