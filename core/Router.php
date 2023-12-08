@@ -20,25 +20,22 @@ class Router
   public function prepare()
   {
 
-
-
-
     $route = $_SERVER['REQUEST_URI'];
     $method = $_SERVER['REQUEST_METHOD'];
 
-    $getMethod=[
-      "GET"=>['/product/calculator'],
-      $method=>[$route]
-               ];
+$routes = explode('/',trim($route));
+ $routes[0]=$method;
+ $file=dirname(__DIR__). '/mvc/view/user' ;
 
- $routes = $getMethod[$method][0];
+     if(file_exists($file.'/')){
 
-                  $controllerConf = new ControllerConf();
-                             switch ($method) {
+$controllerConf = new ControllerConf();
+ 
+                             switch ($routes[0]) {
 
                                case 'GET':
 
-                               return $controllerConf->getMethods($routes);
+                                  return $controllerConf->getMethods($routes,$file.'/'.$routes[2]);
 
                                  break;
 
@@ -50,7 +47,7 @@ class Router
 
                                case 'DELETE':
 
-                                 return  $controllerConf->deleteMethods($routes);
+                                 return  $controllerConf->deleteMethods($routes,$file);
 
                                  break;
 
@@ -59,6 +56,11 @@ class Router
                                  break;
                              }
 
+        }else {
+
+           die('Error: no path');
+
+        }
 
   }
 

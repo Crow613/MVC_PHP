@@ -8,60 +8,78 @@ use Mvc\model\Model;
 class ControllerConf
 {
 
-  public function getMethods($routes)
+  public function getMethods($routes,$path)
   {
 
-     $route = explode( '/', trim($routes, '/'));
-     $flag = $route[0] === 'product';
-     $routeR ='#^'.$route[1].'$#';
-
-      if($flag === false){
-
-             $path = dirname(__DIR__).'/view/'.$route[0].'/'.$route[1].'.php';
+    $flage = $routes[1] === 'product';
 
 
-        if(file_exists($path)){
+   if(!$flage){
 
-             if($routeR){
+     $controller = new Controller;
 
-               $controller = new Controller();
+       if(file_exists($path.'.html')){
 
-               return $controller->getMethod($path);
+          return $controller->getMethod($path.'.html');
 
-            }
+       }elseif(file_exists($path.'.php')){
 
-        }else{
+         return $controller->getMethod($path.'.php');
 
-          die('erorr:404');
+      }else{
+
+         include '../mvc/view/user/login.html';
+
+      }
+
+    }else{
+
+         $file = dirname(__DIR__).'/view/user/login';
+
+          if(file_exists($file.'.html')){
+                 ;
+            include   $file.'.html';
+
+          }elseif(file_exists($file.'.php')){
+
+            include $file.'.php';
+
+          }else{
+
+            die('Error: surch path');
 
           }
-     }else{
 
-       die('sa pti tani login');
-     }
+      exit;
+
+    }
+
+
+
   }
 
   public function postMethods($routes)
   {
-         $route = explode( '/', trim($routes, '/'));
 
-         $routeR = '#^'.$route[1].'$#';
+$model = new Model();
+$method = $routes[2];
+$product = $routes[1];
 
-        if($routeR){
+    if(method_exists($model, $method)){
 
-        $model = new Model();
-          $method = $route[1];
-         if(method_exists($model, $method)){
+       $file = dirname(__DIR__).'/view/product';
+      $files = glob($file. '/*');
+     return $model->$method($files[0]);
 
-          return $model->$method();
+   }elseif (method_exists($model, $product )) {
 
-        }
+    $file = dirname(__DIR__).'/view/product';
+    $files = glob($file. '/*');
 
-     }else{
 
-        die('error');
+   return $model->$product($files[0]);
 
-     }
+   }
 
   }
 

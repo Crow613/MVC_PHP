@@ -10,7 +10,6 @@ class Controller
 
   public function  getMethod($path)
   {
-    //dd($path);
 
     return new Response($path);
 
@@ -24,24 +23,3 @@ class Controller
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-  // $view = new View();
-   //$model = new Model();
-
-   //if(method_exists($view,$method))
-   //{
-
-     //return $view->$method($model,$file);
-
-     //die;
-
-   //}

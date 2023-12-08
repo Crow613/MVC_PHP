@@ -5,8 +5,14 @@ namespace App\product;
 class ModelCalculator
 {
 
-    public function match($num1,$num2,$options,$send,$rez)
+    public function match()
     {
+
+      $num1 = $_POST['num1'];
+      $num2 = $_POST['num2'];
+      $options = $_POST['options'];
+      $send = $_POST['send'];
+
        if(isset($send)){
         switch ($options) {
 
@@ -28,9 +34,10 @@ class ModelCalculator
                 break;
 
         }
-        $rez=$result;
-            //dd($result);
-        echo $rez;
+
+      echo $result;
+
+      exit;
 
     }
  }

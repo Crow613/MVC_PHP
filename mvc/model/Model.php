@@ -4,71 +4,67 @@ namespace Mvc\model;
 
 use Mvc\model\db\Connection;
 use Mvc\controller\Controller;
-use App\product\ModelCalculator;
 use Core\Response;
 use PDO;
 
 class Model
 {
 
-   public function calculator()
+   public function product($path)
    {
 
-     $num1= $_POST['num1'];
-     $num2= $_POST['num2'];
-     $options = $_POST['options'];
-     $send = $_POST['send'];
-     $result=$_POST['rez'];
-
-
-    $calculator = new ModelCalculator();
-    $controller= new Controller();
-    $calculator->match($num1,$num2,$options,$send,$result);
-
-        return $controller->postMethod('../mvc/view/product/calculator.php');
+     $controller = new Controller;
+     $controller->postMethod($path);
 
    }
 
-    public function admin()
-    {
-
-      return  $this->controller->getMethod();
-
-    }
-
-    public function login()
+    public function login($path)
     {
 
        $connect = new Connection;
-
        $email = $_POST['email'];
        $password = $_POST['password'];
 
-       $pass = md5($password) === 'dafsdfasdgeqwgredf';
+       if($email == ''){
 
-       $query = "SELECT  `email`,`password` FROM `users`";
-       $stmt = $connect->pdo->query($query);
+            if ($password == '') {
 
-       $exses = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
 
-        if($email === $exses['email'] && $pass == $exses['password']){
+       }else{
 
-           $controller = new Controller;
-           $controller->postMethod('../mvc/view/product/calculator.php');
+         $query = "SELECT  `email`,`password` FROM `users`";
+         $stmt = $connect->pdo->query($query);
+         $exses = $stmt->fetch(PDO::FETCH_ASSOC);
 
-           //nenc ara routingic ga path@
+         if($email === $exses['email']){
 
-        }else {
+          $pass = md5($password) === 'dafsdfasdgeqwgredf';
 
-          die("error: complete");
+              if ($password === $exses['password']) {
 
-        }
 
-        $connect->pdo = die;
+                $controller = new Controller;
+                $controller->postMethod($path);
+
+              }else{
+
+                  die('Error: password complet');
+              }
+
+         }else{
+
+           die('Error: email complet');
+
+         }
 
     }
 
-    public function registration()
+     $connect->pdo = die;
+
+    }
+
+    public function registration($path)
     {
 
       $name = $_POST['name'];
@@ -79,38 +75,47 @@ class Model
       if($password === $pwd)
       {
 
-         $connect = new Connection;
+         if(!$name == ''){
 
-          $test = $connect->pdo->query("SELECT  `email` FROM `users`");
+           if (!$email == '') {
 
-          $exses = $test->fetch(PDO::FETCH_ASSOC);
-          $mail=$exses['email'];
-          $flag=$email===$mail;
+               if (!$password == '') {
 
-         if($flag === false){
+                 $connect = new Connection;
+                 $exses = $connect->pdo->query("SELECT  `email`,`password` FROM `users`")->fetch(PDO::FETCH_ASSOC);
+                 $pass = md5($password) === 'dafsdfasdgeqwgredf';
 
-           $pass = md5($password) === 'dafsdfasdgeqwgredf';
-           $query = "INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES (NULL, '$name', '$email', '$pass')";
-           $stmt = $connect->pdo->prepare($query);
-           $stmt->execute();
 
-            $controller = new Controller;
+                    if($email == $exses['email']){
 
-                 return  $controller->postMethod('../mvc/view/product/calculator.php');
+                       die('0');
 
-             }else{
+                      }
+                       if ($pass == $exses['password']) {
 
-                    die("error email");
+                     die('1');
 
+
+
+                     }else{
+
+
+
+                              $query = "INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES (NULL, '$name', '$email', '$pass')";
+                              $stmt = $connect->pdo->prepare($query);
+                              $stmt->execute();
+                              $controller = new Controller;
+                              return  $controller->postMethod($path);
+
+
+                     }
+                   }
+                 }
+               }
              }
 
-             $conection->pdo = die;
+              $conection->pdo = die;
 
-    }else{
-
-           die('error');
-
-    }
 
   }
 

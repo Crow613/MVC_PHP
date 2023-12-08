@@ -7,8 +7,8 @@ class Response
 
   public function __construct($path)
   {
-
-    include $path;
+           
+    include($path);
 
   }
 

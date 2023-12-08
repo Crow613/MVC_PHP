@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>LOGIN</title>
+
+    <link rel="stylesheet" href="../public/css/master.css">
+  </head>
+  <body>
+
+    <div class="">
+         <h1>LOGIN PAGE</h1>
+      <form action="/user/login" method="post">
+         <div class="input-group">
+               <input class="input" required type="email" name="email" id="email">
+               <label class="label" for="email">Email</label>
+               <input class="input" required type="password" name="password" id="password">
+               <label class="label" for="password">Password</label>
+               <button type="submit">signin</button>
+         </div>
+      </form>
+            <a href="/user/registration">registration</a>
+    </div>
+  </body>
+</html>
