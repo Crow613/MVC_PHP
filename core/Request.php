@@ -5,25 +5,16 @@ namespace Core;
 class Request
 {
 
-   public array $server;
+  public static function uri() {
 
-  public function __construct()
-  {
-
-    $this->server = $_SERVER;
+    return $_SERVER['REQUEST_URI'];
 
   }
 
-  public function uri() {
-
-    return $this->server['REQUEST_URI'];
-
-  }
-
-  public function getMethod()
+  public static function getMethod()
   {
 
-    return $this->server['REQUEST_METHOD'];
+    return $_SERVER['REQUEST_METHOD'];
 
   }
 

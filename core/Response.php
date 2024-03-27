@@ -1,14 +1,15 @@
 <?php
 
 namespace Core;
+use App\Http\Controller;
 
 class Response
 {
 
-  public function __construct($path)
+  public static function view($path)
   {
-           
-    include($path);
+
+    return include("../resources/view/{$path}.php");
 
   }
 

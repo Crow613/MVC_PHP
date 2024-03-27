@@ -10,7 +10,7 @@ services:
       - "80:80"
     depends_on:
       - app
-    container_name: test_nginx
+    container_name: mvc_nginx
 
   app:
     build:
@@ -18,7 +18,7 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
-    container_name: test_app
+    container_name: mvc_app
     depends_on:
       - db
 
@@ -26,22 +26,11 @@ services:
     image: mysql:latest
     restart: always
     volumes:
-      - ./tmp/db:/var/lib/mysql
+      - /var/lib/mysql
     environment:
       MYSQL_DATABASE: test
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    container_name: test_db
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "8081:80"
-    container_name: test_phpmyadmin
-    depends_on:
-      - db
+    container_name: db
