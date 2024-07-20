@@ -14,8 +14,9 @@ class Router
       
       if($uriRoute === $_SERVER['REQUEST_URI'])
       {
-        $methods = Request::getMethod();
-       return Controller::$methods($param);
+         
+         return Controller::up($param);
+
       }
   
     }

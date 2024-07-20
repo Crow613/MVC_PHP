@@ -3,11 +3,12 @@
     "psr-4": {
       "App\\": "./app",
       "Core\\": "./core",
-      "Router\\": "./router"
+      "Db\\": "./database"
     }
   },
 
   "require": {
-    "symfony/var-dumper": "6.4.x-dev"
+    "symfony/var-dumper": "6.4.x-dev",
+    "symfony/dotenv": "^7.0"
   }
 }

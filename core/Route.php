@@ -8,25 +8,28 @@ class Route
 {
     
     public static function get(String $path,array $param)
-    {
-        
+    {  
+       
         if (method_exists($param[0],$param[1])) {
 
             return new Router($path,$param);
-        }
-        
+          } 
     }
-    public function post() 
+   
+    public static function post(String $path, array $param) 
     {
         
-    }
-    public function update() 
-    {
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            
+            if (method_exists($param[0],$param[1])) {
+
+                return new Router($path,$param);
+              } 
+        }      
         
     }
-    public function delete() 
-    {
-        
-    }
+  
 
 }

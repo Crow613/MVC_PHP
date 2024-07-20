@@ -5,9 +5,9 @@ services:
     image: nginx:latest
     volumes:
       - ./:/var/www
-      - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./core/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "80:80"
+      - '${APP_PORT}:80'
     depends_on:
       - app
     container_name: mvc_nginx
@@ -15,22 +15,24 @@ services:
   app:
     build:
       context: .
-      dockerfile: _docker/app/Dockerfile
+      dockerfile: core/nginx/app/Dockerfile
     volumes:
       - ./:/var/www
     container_name: mvc_app
     depends_on:
-      - db
+      - mysql
 
-  db:
+  mysql:
     image: mysql:latest
     restart: always
     volumes:
       - /var/lib/mysql
     environment:
-      MYSQL_DATABASE: test
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: '${DB_PASS}'
+      MYSQL_DATABASE: '${DB_NAME}'
+      MYSQL_USER: '${DB_USER}'
+      MYSQL_PASSWORD: '${DB_PASS}'
     ports:
-      - "3306:3306"
+      - '${DB_PORT}:3306'
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     container_name: db

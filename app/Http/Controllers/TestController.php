@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Core\Response;
+use Core\Db\Insert;
 
-class TestController 
+
+class TestController extends Controllers
 {
     public function index()
     {
-        Response::view('blog');
+        $db = new Insert();
+        dd($db->insert());
+    }
+    public function email()
+    {
     }
 }

@@ -2,12 +2,9 @@
 
 namespace App\http\Controllers;
 
-class Controllers
+abstract class Controllers
 {
 
-  public function __construct(Object $controller,string $method)
-  {
-    return $controller->$method();
-  }
+//
 
 }
