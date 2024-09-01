@@ -1,5 +1,3 @@
 {
-    "sqltools.connections": [],
-    "intelliphp.inlineSuggestionsEnabled": true,
-    "php.version": "8.3"
+                 "php.version": "8.4"
 }

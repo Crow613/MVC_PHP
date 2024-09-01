@@ -1,11 +1,20 @@
 <?php
 
 namespace Core;
-use App\Http\Controller;
+
+use Exception;
 
 class Response
 {
+        public function sheer($object)
+        {
+                try {
+                        echo $object;
+                } catch (Exception $e) {
+                        echo 'ERROR' . $e->getMessage();
 
-  
+                }
+
+        }
 
 }

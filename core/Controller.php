@@ -2,18 +2,15 @@
 
 namespace Core;
 
+
+
+
+
 class Controller
 {
-
-  public static function  up(array $param)
-  {
-    
-    $controller = new $param[0];
-    $method = $param[1];
-    
-      return $controller->$method();
-
-  }
+public function __construct($param,callable $callback) {
+   $callback(new $param[0],$param[1]);
+}
 
 
 }

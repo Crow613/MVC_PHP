@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Core\Db\Insert;
+use Core\View;
+use Core\Request;
 
+
+use Core\shablonisator\Methods;
+use function PHPUnit\Framework\callback;
 
 class TestController extends Controllers
 {
     public function index()
     {
-        $db = new Insert();
-        dd($db->insert());
+
+
+        return view('test', ['title' => 'blogs',]);
+
     }
     public function email()
     {
+        dd(method('PUT'));
     }
 }

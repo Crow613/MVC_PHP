@@ -2,34 +2,51 @@
 
 namespace Core;
 
-use Core\Router;
 
-class Route 
+class Route
 {
-    
-    public static function get(String $path,array $param)
-    {  
-       
-        if (method_exists($param[0],$param[1])) {
 
-            return new Router($path,$param);
-          } 
-    }
-   
-    public static function post(String $path, array $param) 
+    public static function get(string $path, array $param)
     {
-        
-        
-        if ($_SERVER['REQUEST_METHOD'] === 'POST')
-        {
-            
-            if (method_exists($param[0],$param[1])) {
 
-                return new Router($path,$param);
-              } 
-        }      
-        
+        return file_chacker_route($path, $param);
+
     }
-  
+
+    public static function post(string $path, array $param)
+    {
+        $request = new Request();
+
+        if ($request->method() === 'POST') {
+            return file_chacker_route($path, $param);
+        }
+
+    }
+    public static function put($path, $param)
+    {
+
+        /**
+         * TUDU
+         */
+
+    }
+    public static function patch(string $path, array $param)
+    {
+        $request = new Request();
+        dd($request->method());
+        if ($request->method() === 'PATCH') {
+
+        }
+    }
+    public static function delete(string $path, array $param)
+    {
+        $request = new Request();
+        dd($request->method());
+        if ($request->method() === 'DELETE') {
+            return file_chacker_route($path, $param);
+        }
+    }
+
+
 
 }

@@ -2,9 +2,8 @@
 namespace Core;
 
 use Core\Db\DB;
-use Core\Interfeses\Model_Interfese;
 
-abstract class Models implements Model_Interfese
+abstract class Models
 {
     public static function get(): array|false
     {
@@ -16,5 +15,4 @@ abstract class Models implements Model_Interfese
         $db = new DB();
         return $db->select()[$id];
     }
-
 }

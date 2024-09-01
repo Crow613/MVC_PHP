@@ -2,29 +2,32 @@
 
 namespace Core;
 
- class Request
+use PhpParser\Builder\Method;
+
+class Request extends Method
 {
+  private $get;
+  private $file;
+  private $method;
 
-  
-  public static function get()
+  public function __construct()
   {
-    return [
-      'atributes'=>[],
-      'server'=>$_SERVER,
-      'request'=>$_REQUEST,
-      'model'=>[Models::class,Models::get()],
-      'file'=>$_FILES,
-      'session'=>$_SESSION=null,
-      'cookie'=>$_COOKIE,
-      'get'=>$_GET,
-      'post'=>$_POST,
-    ];
+    $this->get = $_SERVER;
+    $this->file = $_FILES;
+    $this->method = $_SERVER['REQUEST_METHOD'];
   }
-  public static function post()
-  {
-    return  ['post'=>[$_POST],];
-  }
- 
- 
 
- }
+  public function get()
+  {
+    return $this->get;
+  }
+  public function file()
+  {
+    return $this->file;
+  }
+  public function method()
+  {
+    return $this->method;
+  }
+
+}

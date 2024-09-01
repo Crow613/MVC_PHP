@@ -1,10 +1,8 @@
 <?php
 
-namespace App\http\Controllers;
+namespace App\Http\Controllers;
 
 abstract class Controllers
 {
-
-//
-
+    //
 }
